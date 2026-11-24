@@ -1,4 +1,3 @@
-
 <!doctype html>
 <html lang="en">
 <head>
@@ -201,6 +200,14 @@
       font-size: .86rem;
     }
 
+    .photo-error {
+      display: none;
+      padding: 25px 12px;
+      text-align: center;
+      color: var(--muted);
+      font-size: .85rem;
+    }
+
     .empty {
       border: 1px dashed #44505b;
       border-radius: 16px;
@@ -295,14 +302,11 @@
 
     <section id="home">
       <div class="hero">
-
-        <!-- Corrected logo path: file in repository root -->
         <img
           class="logo"
           src="paint-happens-logo.png"
           alt="Paint Happens logo"
         >
-
         <h1>More Than <span>Just Walls.</span></h1>
       </div>
 
@@ -381,33 +385,54 @@
   </footer>
 
   <script>
-    // Gallery image paths must match uploaded filenames.
-    // For example:
-    // {file: 'images/living-room.jpg', caption: 'Living room repaint'}
+    // Photos are currently uploaded to the repository root.
+    // Filenames must match GitHub exactly, including capitalization.
 
     const galleries = {
       interior: {
         title: 'Interior Painting',
         description: 'Walls, ceilings, trim and interior transformations.',
-        photos: []
+        photos: [
+          {file: 'Interior_01_stairway painted.png', caption: 'Custom stairway painting'},
+          {file: 'Interior_02_bedroom painted.png', caption: 'Bedroom painting'},
+          {file: 'Interior_03_wall near fireplace painted.png', caption: 'Living room and fireplace'},
+          {file: 'Interior_04_bathroom painted.png', caption: 'Bathroom painting'},
+          {file: 'Interior_05_ling room painted.png', caption: 'Living room painting'},
+          {file: 'Brownton Cabinets B4.jpg', caption: 'Cabinet refinishing — before'},
+          {file: 'Brownton Cabinets painted.jpg', caption: 'Cabinet refinishing — after'}
+        ]
       },
 
       furniture: {
         title: 'Furniture Refinishing',
         description: 'Restorations, repaints and custom finishes.',
-        photos: []
+        photos: [
+          {file: 'Refinishing_06_Blue chair.HEIC', caption: 'Custom chair refinishing'},
+          {file: 'Stool 3 top.HEIC', caption: 'Custom acrylic-pour stool'},
+          {file: 'Stool 3 turned.HEIC', caption: 'Hand-painted stool detail'},
+          {file: 'Stool 4 top.HEIC', caption: 'Decorative stool finish'},
+          {file: 'stool 4 turned.HEIC', caption: 'Custom stool — additional view'},
+          {file: 'side desk finished.HEIC', caption: 'Refinished side desk'},
+          {file: 'side desk finished side.HEIC', caption: 'Side desk detail'}
+        ]
       },
 
       windows: {
         title: 'Window Art',
-        description: 'Storefront graphics and seasonal window painting.',
-        photos: []
+        description: 'Storefront graphics and custom window painting.',
+        photos: [
+          {file: 'Transformations finished.JPG', caption: 'Trans-FUR-Mations — finished storefront'},
+          {file: 'Transformation Before.JPG', caption: 'Storefront — before'}
+        ]
       },
 
       creative: {
         title: 'Creative Projects',
         description: 'Murals, decorative work and unique ideas.',
-        photos: []
+        photos: [
+          {file: "Tannon's-Wall.gif", caption: 'Custom hand-painted wall mural'},
+          {file: 'Time-Out-chair.gif', caption: 'Personalized Time-Out Chair'}
+        ]
       }
     };
 
@@ -450,10 +475,19 @@
             img.alt = p.caption || gallery.title;
             img.loading = 'lazy';
 
+            const error = document.createElement('div');
+            error.className = 'photo-error';
+            error.textContent = 'Photo unavailable: ' + p.file;
+
+            img.onerror = function() {
+              img.style.display = 'none';
+              error.style.display = 'block';
+            };
+
             const cap = document.createElement('figcaption');
             cap.textContent = p.caption || gallery.title;
 
-            fig.append(img, cap);
+            fig.append(img, error, cap);
             el.append(fig);
           }
         }
