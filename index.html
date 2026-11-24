@@ -1,507 +1,90 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="theme-color" content="#080a0d">
-  <meta name="description" content="Paint Happens — interior painting, furniture refinishing, window art and creative projects in Ashland, Ohio.">
-  <title>Paint Happens | More Than Just Walls.</title>
-
-  <style>
-    :root {
-      --bg: #080a0d;
-      --panel: #13171c;
-      --line: #2a3036;
-      --lime: #b7f900;
-      --blue: #169aff;
-      --text: #f6f8fb;
-      --muted: #b2bac3;
-    }
-
-    * { box-sizing: border-box; }
-    html { scroll-behavior: smooth; }
-
-    body {
-      margin: 0;
-      background: var(--bg);
-      color: var(--text);
-      font-family: system-ui, -apple-system, BlinkMacSystemFont,
-        "Segoe UI", sans-serif;
-    }
-
-    a { color: inherit; }
-
-    .wrap {
-      width: min(1050px, calc(100% - 36px));
-      margin: auto;
-    }
-
-    .topbar {
-      border-bottom: 1px solid var(--line);
-      padding: 16px 0;
-    }
-
-    .topbar .wrap {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 12px;
-    }
-
-    .brand {
-      font-weight: 850;
-      letter-spacing: .09em;
-      font-size: .84rem;
-      text-decoration: none;
-    }
-
-    .topbar .estimate {
-      text-decoration: none;
-      color: var(--muted);
-      font-size: .9rem;
-    }
-
-    .topbar .estimate:hover { color: var(--lime); }
-
-    .hero {
-      text-align: center;
-      padding: 42px 0 30px;
-    }
-
-    .logo {
-      display: block;
-      width: min(290px, 70vw);
-      height: auto;
-      margin: 0 auto 22px;
-    }
-
-    .hero h1 {
-      font-size: clamp(1.8rem, 5vw, 3.2rem);
-      font-style: italic;
-      line-height: 1.1;
-      letter-spacing: -.04em;
-      margin: 0;
-    }
-
-    .hero h1 span { color: var(--lime); }
-
-    .grid {
-      max-width: 760px;
-      margin: 30px auto 0;
-      display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 12px;
-    }
-
-    .tile {
-      position: relative;
-      min-height: 104px;
-      padding: 16px 28px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-      text-decoration: none;
-      background: linear-gradient(135deg, #171d24, #101318);
-      border: 1px solid var(--line);
-      border-radius: 17px;
-      transition: transform .15s, border-color .15s;
-    }
-
-    .tile:hover, .tile:focus-visible {
-      transform: translateY(-3px);
-      border-color: var(--lime);
-      outline: none;
-    }
-
-    .tile::before {
-      content: "";
-      position: absolute;
-      left: 50%;
-      top: 0;
-      transform: translateX(-50%);
-      width: 48px;
-      height: 3px;
-      background: var(--lime);
-    }
-
-    .tile strong {
-      font-size: clamp(1.08rem, 2.5vw, 1.4rem);
-    }
-
-    .tile small {
-      display: block;
-      color: var(--muted);
-      font-size: .79rem;
-      margin-top: 4px;
-    }
-
-    .tile .arrow {
-      position: absolute;
-      right: 14px;
-      bottom: 12px;
-      color: var(--lime);
-      font-size: 1.1rem;
-    }
-
-    .back {
-      display: inline-block;
-      color: var(--lime);
-      text-decoration: none;
-      margin: 30px 0 8px;
-      font-weight: 700;
-    }
-
-    .eyebrow {
-      font-size: .73rem;
-      font-weight: 800;
-      letter-spacing: .18em;
-      color: var(--lime);
-      text-transform: uppercase;
-    }
-
-    .gallery-head h1 {
-      color: var(--blue);
-      font-size: clamp(1.9rem, 5vw, 2.7rem);
-      margin: 8px 0;
-    }
-
-    .gallery-head p {
-      color: var(--muted);
-      margin: 0 0 22px;
-    }
-
-    .photos {
-      display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 14px;
-      margin: 12px 0 42px;
-    }
-
-    .photo {
-      border: 1px solid var(--line);
-      border-radius: 13px;
-      overflow: hidden;
-      background: var(--panel);
-      margin: 0;
-    }
-
-    .photo img {
-      display: block;
-      width: 100%;
-      aspect-ratio: 4 / 3;
-      object-fit: cover;
-    }
-
-    .photo figcaption {
-      padding: 12px 14px;
-      color: var(--muted);
-      font-size: .86rem;
-    }
-
-    .photo-error {
-      display: none;
-      padding: 25px 12px;
-      text-align: center;
-      color: var(--muted);
-      font-size: .85rem;
-    }
-
-    .empty {
-      border: 1px dashed #44505b;
-      border-radius: 16px;
-      padding: 45px 20px;
-      text-align: center;
-      color: var(--muted);
-      grid-column: 1 / -1;
-    }
-
-    .empty strong {
-      display: block;
-      color: var(--text);
-      font-size: 1.2rem;
-      margin-bottom: 8px;
-    }
-
-    .cta {
-      border: 1px solid #3c5016;
-      background: #141b0c;
-      border-radius: 17px;
-      text-align: center;
-      padding: 28px 18px;
-      margin: 28px 0 50px;
-    }
-
-    .cta h2 { margin: 0 0 8px; }
-
-    .cta p {
-      color: var(--muted);
-      margin: 0 0 18px;
-    }
-
-    .btn {
-      display: inline-block;
-      background: var(--lime);
-      color: #101500;
-      text-decoration: none;
-      border-radius: 999px;
-      padding: 13px 25px;
-      font-weight: 850;
-    }
-
-    .btn:focus-visible {
-      outline: 3px solid white;
-      outline-offset: 3px;
-    }
-
-    footer {
-      border-top: 1px solid var(--line);
-      padding: 22px 0 34px;
-      color: var(--muted);
-      text-align: center;
-      font-size: .82rem;
-    }
-
-    .hide { display: none !important; }
-
-    @media (max-width: 650px) {
-      .grid {
-        max-width: 430px;
-        grid-template-columns: 1fr;
-        gap: 10px;
-      }
-
-      .tile {
-        min-height: 92px;
-        padding: 14px 24px;
-      }
-
-      .photos {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-      }
-
-      .hero { padding-top: 28px; }
-    }
-
-    @media (max-width: 420px) {
-      .photos { grid-template-columns: 1fr; }
-    }
-  </style>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#080a0d">
+<meta name="description" content="Paint Happens — interior painting, furniture refinishing, window art and creative projects in Ashland, Ohio.">
+<title>Paint Happens | More Than Just Walls.</title>
+<style>
+:root{--bg:#080a0d;--panel:#13171c;--line:#2a3036;--lime:#b7f900;--blue:#169aff;--text:#f6f8fb;--muted:#b2bac3}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--bg);color:var(--text);font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}a{color:inherit}.wrap{width:min(1050px,calc(100% - 36px));margin:auto}.topbar{border-bottom:1px solid var(--line);padding:16px 0}.topbar .wrap{display:flex;align-items:center;justify-content:space-between;gap:12px}.brand{font-weight:850;letter-spacing:.09em;font-size:.84rem;text-decoration:none}.topbar .estimate{text-decoration:none;color:var(--muted);font-size:.9rem}.topbar .estimate:hover{color:var(--lime)}.hero{text-align:center;padding:42px 0 30px}.logo{display:block;width:min(290px,70vw);height:auto;margin:0 auto 22px}.hero h1{font-size:clamp(1.8rem,5vw,3.2rem);font-style:italic;line-height:1.1;letter-spacing:-.04em;margin:0}.hero h1 span{color:var(--lime)}.grid{max-width:760px;margin:30px auto 0;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.tile{position:relative;min-height:104px;padding:16px 28px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;text-decoration:none;background:linear-gradient(135deg,#171d24,#101318);border:1px solid var(--line);border-radius:17px;transition:transform .15s,border-color .15s}.tile:hover,.tile:focus-visible{transform:translateY(-3px);border-color:var(--lime);outline:none}.tile::before{content:"";position:absolute;left:50%;top:0;transform:translateX(-50%);width:48px;height:3px;background:var(--lime)}.tile strong{font-size:clamp(1.08rem,2.5vw,1.4rem)}.tile small{display:block;color:var(--muted);font-size:.79rem;margin-top:4px}.tile .arrow{position:absolute;right:14px;bottom:12px;color:var(--lime);font-size:1.1rem}.back{display:inline-block;color:var(--lime);text-decoration:none;margin:30px 0 8px;font-weight:700}.eyebrow{font-size:.73rem;font-weight:800;letter-spacing:.18em;color:var(--lime);text-transform:uppercase}.gallery-head h1{color:var(--blue);font-size:clamp(1.9rem,5vw,2.7rem);margin:8px 0}.gallery-head p{color:var(--muted);margin:0 0 22px}.photos{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;margin:12px 0 42px}.photo{border:1px solid var(--line);border-radius:13px;overflow:hidden;background:var(--panel);margin:0}.photo button{display:block;width:100%;padding:0;border:0;background:transparent;cursor:zoom-in}.photo img{display:block;width:100%;aspect-ratio:4/3;object-fit:cover}.photo button:focus-visible{outline:3px solid var(--lime);outline-offset:-3px}.photo figcaption{padding:12px 14px;color:var(--muted);font-size:.86rem}.photo-error{display:none;padding:25px 12px;text-align:center;color:var(--muted);font-size:.85rem}.empty{border:1px dashed #44505b;border-radius:16px;padding:45px 20px;text-align:center;color:var(--muted);grid-column:1/-1}.empty strong{display:block;color:var(--text);font-size:1.2rem;margin-bottom:8px}.cta{border:1px solid #3c5016;background:#141b0c;border-radius:17px;text-align:center;padding:28px 18px;margin:28px 0 50px}.cta h2{margin:0 0 8px}.cta p{color:var(--muted);margin:0 0 18px}.btn{display:inline-block;background:var(--lime);color:#101500;text-decoration:none;border-radius:999px;padding:13px 25px;font-weight:850}.btn:focus-visible{outline:3px solid white;outline-offset:3px}footer{border-top:1px solid var(--line);padding:22px 0 34px;color:var(--muted);text-align:center;font-size:.82rem}.hide{display:none!important}
+.lightbox{position:fixed;inset:0;z-index:1000;background:rgba(0,0,0,.94);display:flex;align-items:center;justify-content:center;flex-direction:column;padding:56px 20px 24px}.lightbox img{max-width:100%;max-height:calc(100vh - 140px);object-fit:contain}.lightbox p{color:white;text-align:center}.lightbox-close{position:absolute;top:12px;right:18px;border:1px solid #777;background:#151515;color:white;border-radius:8px;padding:8px 14px;font-size:1.4rem;cursor:pointer}
+@media(max-width:650px){.grid{max-width:430px;grid-template-columns:1fr;gap:10px}.tile{min-height:92px;padding:14px 24px}.photos{grid-template-columns:repeat(2,minmax(0,1fr))}.hero{padding-top:28px}}@media(max-width:420px){.photos{grid-template-columns:1fr}}
+</style>
 </head>
-
 <body>
-  <header class="topbar">
-    <div class="wrap">
-      <a class="brand" href="#home">PAINT HAPPENS</a>
-      <a class="estimate" href="#contact">FREE ESTIMATES ↗</a>
-    </div>
-  </header>
-
-  <main class="wrap">
-
-    <section id="home">
-      <div class="hero">
-        <img
-          class="logo"
-          src="paint-happens-logo.png"
-          alt="Paint Happens logo"
-        >
-        <h1>More Than <span>Just Walls.</span></h1>
-      </div>
-
-      <div class="grid" id="categories">
-
-        <a class="tile" href="#interior">
-          <div>
-            <strong>Interior Painting</strong>
-            <small>Walls, ceilings, trim &amp; more</small>
-          </div>
-          <span class="arrow" aria-hidden="true">↗</span>
-        </a>
-
-        <a class="tile" href="#furniture">
-          <div>
-            <strong>Furniture Refinishing</strong>
-            <small>Restorations &amp; custom finishes</small>
-          </div>
-          <span class="arrow" aria-hidden="true">↗</span>
-        </a>
-
-        <a class="tile" href="#windows">
-          <div>
-            <strong>Window Art</strong>
-            <small>Storefronts &amp; seasonal designs</small>
-          </div>
-          <span class="arrow" aria-hidden="true">↗</span>
-        </a>
-
-        <a class="tile" href="#creative">
-          <div>
-            <strong>Creative Projects</strong>
-            <small>Decorative painting &amp; more</small>
-          </div>
-          <span class="arrow" aria-hidden="true">↗</span>
-        </a>
-
-      </div>
-    </section>
-
-    <section id="gallery" class="hide">
-      <a class="back" href="#home">← Back to categories</a>
-
-      <div class="gallery-head">
-        <div class="eyebrow">Previous Works</div>
-        <h1 id="gallery-title"></h1>
-        <p id="gallery-description"></p>
-      </div>
-
-      <div id="photos" class="photos"></div>
-    </section>
-
-    <section id="contact" class="cta">
-      <h2>Have a project in mind?</h2>
-      <p>Serving Ashland, Ohio &amp; surrounding areas.</p>
-
-      <a
-        class="btn"
-        href="mailto:painthappens4u@gmail.com?subject=Paint%20Happens%20Estimate%20Request"
-      >
-        Request a Free Estimate
-      </a>
-
-      <p style="margin:16px 0 0">
-        Call or text:
-        <a href="tel:+14196897236">(419) 689-7236</a>
-      </p>
-    </section>
-
-  </main>
-
-  <footer>
-    <div class="wrap">
-      PAINT HAPPENS · More Than Just Walls.
-    </div>
-  </footer>
-
-  <script>
-    // Photos are currently uploaded to the repository root.
-    // Filenames must match GitHub exactly, including capitalization.
-
-    const galleries = {
-      interior: {
-        title: 'Interior Painting',
-        description: 'Walls, ceilings, trim and interior transformations.',
-        photos: [
-          {file: 'Interior_01_stairway painted.png', caption: 'Custom stairway painting'},
-          {file: 'Interior_02_bedroom painted.png', caption: 'Bedroom painting'},
-          {file: 'Interior_03_wall near fireplace painted.png', caption: 'Living room and fireplace'},
-          {file: 'Interior_04_bathroom painted.png', caption: 'Bathroom painting'},
-          {file: 'Interior_05_ling room painted.png', caption: 'Living room painting'},
-          {file: 'Brownton Cabinets B4.jpg', caption: 'Cabinet refinishing — before'},
-          {file: 'Brownton Cabinets painted.jpg', caption: 'Cabinet refinishing — after'}
-        ]
-      },
-
-      furniture: {
-        title: 'Furniture Refinishing',
-        description: 'Restorations, repaints and custom finishes.',
-        photos: [
-          {file: 'Refinishing_06_Blue chair.HEIC', caption: 'Custom chair refinishing'},
-          {file: 'Stool 3 top.HEIC', caption: 'Custom acrylic-pour stool'},
-          {file: 'Stool 3 turned.HEIC', caption: 'Hand-painted stool detail'},
-          {file: 'Stool 4 top.HEIC', caption: 'Decorative stool finish'},
-          {file: 'stool 4 turned.HEIC', caption: 'Custom stool — additional view'},
-          {file: 'side desk finished.HEIC', caption: 'Refinished side desk'},
-          {file: 'side desk finished side.HEIC', caption: 'Side desk detail'}
-        ]
-      },
-
-      windows: {
-        title: 'Window Art',
-        description: 'Storefront graphics and custom window painting.',
-        photos: [
-          {file: 'Transformations finished.JPG', caption: 'Trans-FUR-Mations — finished storefront'},
-          {file: 'Transformation Before.JPG', caption: 'Storefront — before'}
-        ]
-      },
-
-      creative: {
-        title: 'Creative Projects',
-        description: 'Murals, decorative work and unique ideas.',
-        photos: [
-          {file: "Tannon's-Wall.gif", caption: 'Custom hand-painted wall mural'},
-          {file: 'Time-Out-chair.gif', caption: 'Personalized Time-Out Chair'}
-        ]
-      }
-    };
-
-    function render() {
-      const key = location.hash.slice(1);
-      const gallery = galleries[key];
-
-      document.getElementById('home')
-        .classList.toggle('hide', !!gallery);
-
-      document.getElementById('gallery')
-        .classList.toggle('hide', !gallery);
-
-      if (gallery) {
-        document.title = gallery.title + ' | Paint Happens';
-
-        document.getElementById('gallery-title').textContent =
-          gallery.title;
-
-        document.getElementById('gallery-description').textContent =
-          gallery.description;
-
-        const el = document.getElementById('photos');
-        el.replaceChildren();
-
-        if (!gallery.photos.length) {
-          const box = document.createElement('div');
-          box.className = 'empty';
-          box.innerHTML =
-            '<strong>Gallery coming soon</strong>' +
-            'Photos of completed projects will appear here.';
-          el.append(box);
-        } else {
-          for (const p of gallery.photos) {
-            const fig = document.createElement('figure');
-            fig.className = 'photo';
-
-            const img = document.createElement('img');
-            img.src = p.file;
-            img.alt = p.caption || gallery.title;
-            img.loading = 'lazy';
-
-            const error = document.createElement('div');
-            error.className = 'photo-error';
-            error.textContent = 'Photo unavailable: ' + p.file;
-
-            img.onerror = function() {
-              img.style.display = 'none';
-              error.style.display = 'block';
-            };
-
-            const cap = document.createElement('figcaption');
-            cap.textContent = p.caption || gallery.title;
-
-            fig.append(img, error, cap);
-            el.append(fig);
-          }
-        }
-      } else {
-        document.title = 'Paint Happens | More Than Just Walls.';
-      }
-
-      if (key !== 'contact') {
-        window.scrollTo({top: 0, behavior: 'instant'});
-      }
-    }
-
-    window.addEventListener('hashchange', render);
-    render();
-  </script>
-</body>
-</html>
+<header class="topbar"><div class="wrap"><a class="brand" href="#home">PAINT HAPPENS</a><a class="estimate" href="#contact">FREE ESTIMATES ↗</a></div></header>
+<main class="wrap">
+<section id="home"><div class="hero"><img class="logo" src="paint-happens-logo.png" alt="Paint Happens logo"><h1>More Than <span>Just Walls.</span></h1></div>
+<div class="grid" id="categories">
+<a class="tile" href="#interior"><div><strong>Interior Painting</strong><small>Walls, ceilings, trim &amp; more</small></div><span class="arrow" aria-hidden="true">↗</span></a>
+<a class="tile" href="#furniture"><div><strong>Furniture Refinishing</strong><small>Restorations &amp; custom finishes</small></div><span class="arrow" aria-hidden="true">↗</span></a>
+<a class="tile" href="#windows"><div><strong>Window Art</strong><small>Storefronts &amp; seasonal designs</small></div><span class="arrow" aria-hidden="true">↗</span></a>
+<a class="tile" href="#creative"><div><strong>Creative Projects</strong><small>Decorative painting &amp; more</small></div><span class="arrow" aria-hidden="true">↗</span></a>
+</div></section>
+<section id="gallery" class="hide"><a class="back" href="#home">← Back to categories</a><div class="gallery-head"><div class="eyebrow">Previous Works</div><h1 id="gallery-title"></h1><p id="gallery-description"></p></div><div id="photos" class="photos"></div></section>
+<section id="contact" class="cta"><h2>Have a project in mind?</h2><p>Serving Ashland, Ohio &amp; surrounding areas.</p><a class="btn" href="mailto:painthappens4u@gmail.com?subject=Paint%20Happens%20Estimate%20Request">Request a Free Estimate</a><p style="margin:16px 0 0">Call or text: <a href="tel:+14196897236">(419) 689-7236</a></p></section>
+</main>
+<footer><div class="wrap">PAINT HAPPENS · More Than Just Walls.</div></footer>
+<div id="lightbox" class="lightbox hide" role="dialog" aria-modal="true" aria-label="Photo viewer"><button id="lightbox-close" class="lightbox-close" type="button" aria-label="Close photo">×</button><img id="lightbox-image" alt=""><p id="lightbox-caption"></p></div>
+<script>
+// Files are in the repository root. Names and capitalization match the uploaded files.
+const galleries={
+ interior:{title:'Interior Painting',description:'Walls, ceilings, trim and interior transformations.',photos:[
+  {file:'Interior_01_stairway painted.png',caption:'Custom stairway painting'},
+  {file:'Interior_02_bedroom painted.png',caption:'Bedroom painting'},
+  {file:'Interior_03_wall near fireplace painted.png',caption:'Living room and fireplace'},
+  {file:'Interior_04_bathroom painted.png',caption:'Bathroom painting'},
+  {file:'Interior_05_ling room painted.png',caption:'Living room painting'},
+  {file:'Brownton Cabinets B4.jpg',caption:'Cabinet refinishing — before'},
+  {file:'Brownton Cabinets painted.jpg',caption:'Cabinet refinishing — after'}]},
+ furniture:{title:'Furniture Refinishing',description:'Restorations, repaints and custom finishes.',photos:[
+  {file:'Refinishing_06_Blue chair.png',caption:'Custom chair refinishing'},
+  {file:'Stool 3 top.png',caption:'Custom acrylic-pour stool'},
+  {file:'Stool 3 turned.png',caption:'Hand-painted stool detail'},
+  {file:'Stool 4 top.png',caption:'Decorative stool finish'},
+  {file:'stool 4 turned.png',caption:'Custom stool — additional view'},
+  {file:'side desk finished.png',caption:'Refinished side desk'},
+  {file:'side desk finished side.png',caption:'Side desk detail'}]},
+ windows:{title:'Window Art',description:'Storefront graphics and custom window painting.',photos:[
+  {file:'Transformations finished.png',caption:'Trans-FUR-Mations — finished storefront'},
+  {file:'Transformation Before.png',caption:'Storefront — before'}]},
+ creative:{title:'Creative Projects',description:'Murals, decorative work and unique ideas.',photos:[
+  {file:"Tannon's-Wall.gif",caption:'Custom hand-painted wall mural'},
+  {file:'Time-Out-chair.gif',caption:'Personalized Time-Out Chair'}]}
+};
+const lightbox=document.getElementById('lightbox');
+const lightboxImage=document.getElementById('lightbox-image');
+const lightboxCaption=document.getElementById('lightbox-caption');
+let previousFocus=null;
+function openPhoto(photo){previousFocus=document.activeElement;lightboxImage.src=photo.file;lightboxImage.alt=photo.caption;lightboxCaption.textContent=photo.caption;lightbox.classList.remove('hide');document.body.style.overflow='hidden';document.getElementById('lightbox-close').focus()}
+function closePhoto(){lightbox.classList.add('hide');lightboxImage.removeAttribute('src');document.body.style.overflow='';if(previousFocus)previousFocus.focus()}
+document.getElementById('lightbox-close').addEventListener('click',closePhoto);
+lightbox.addEventListener('click',e=>{if(e.target===lightbox)closePhoto()});
+document.addEventListener('keydown',e=>{if(e.key==='Escape'&&!lightbox.classList.contains('hide'))closePhoto()});
+function render(){
+ const key=location.hash.slice(1);const gallery=galleries[key];
+ document.getElementById('home').classList.toggle('hide',!!gallery);
+ document.getElementById('gallery').classList.toggle('hide',!gallery);
+ if(gallery){
+  document.title=gallery.title+' | Paint Happens';
+  document.getElementById('gallery-title').textContent=gallery.title;
+  document.getElementById('gallery-description').textContent=gallery.description;
+  const el=document.getElementById('photos');el.replaceChildren();
+  if(!gallery.photos.length){const box=document.createElement('div');box.className='empty';box.innerHTML='<strong>Gallery coming soon</strong>Photos of completed projects will appear here.';el.append(box)}
+  else for(const p of gallery.photos){
+   const fig=document.createElement('figure');fig.className='photo';
+   const button=document.createElement('button');button.type='button';button.setAttribute('aria-label','View full photo: '+p.caption);
+   const img=document.createElement('img');img.src=p.file;img.alt=p.caption;img.loading='lazy';
+   const error=document.createElement('div');error.className='photo-error';error.textContent='Photo unavailable: '+p.file;
+   img.onerror=()=>{button.style.display='none';error.style.display='block'};
+   button.append(img);button.addEventListener('click',()=>openPhoto(p));
+   const cap=document.createElement('figcaption');cap.textContent=p.caption;
+   fig.append(button,error,cap);el.append(fig);
+  }
+ }else{document.title='Paint Happens | More Than Just Walls.'}
+ if(key!=='contact')window.scrollTo({top:0,behavior:'instant'});
+}
+window.addEventListener('hashchange',()=>{if(!lightbox.classList.contains('hide'))closePhoto();render()});render();
+</script>
+</body></html>
